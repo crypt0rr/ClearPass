@@ -6,6 +6,12 @@ ClearPass is a simple password generator that creates strong, readable passwords
 
 All passwords are generated locally in the browser. Nothing is sent to a server, stored remotely, or logged.
 
+## URLs
+
+* [clearpass.offsec.nl](https://clearpass.offsec.nl/)
+* [password.offsec.nl](https://password.offsec.nl/)
+* [pw.offsec.nl](https://pw.offsec.nl/)
+
 ## Why ClearPass?
 
 Typing or sharing generated passwords can be error-prone when they contain visually similar characters. ClearPass solves this by creating passwords that are both secure and easier for humans to read, copy, and type correctly.
@@ -34,18 +40,10 @@ The ambiguous characters `1`, `l`, `0`, `O`, and `I` are intentionally excluded.
 
 ## Run locally
 
-Open `index.html` in your browser. No build step, dependencies, or server are required.
-
-For the deployable version, serve the `public` directory:
+Serve the `public` directory:
 
 ```sh
 python3 -m http.server 8080 --directory public
 ```
 
-## Hosting
-
-The `public` directory contains the static site and security headers for hosting on:
-
-* `clearpass.offsec.nl`
-* `password.offsec.nl`
-* `pw.offsec.nl`
+No build step or dependencies are required.
