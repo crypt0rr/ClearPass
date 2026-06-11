@@ -205,12 +205,19 @@ h1 {
 }
 
 label,
-.group-label {
+legend {
   display: block;
   margin-bottom: 8px;
   color: #2d3748;
   font-size: 0.92rem;
   font-weight: 800;
+}
+
+.character-groups {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 input[type="number"] {
@@ -222,6 +229,13 @@ input[type="number"] {
   background: #fbfcfe;
   color: var(--text);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.help-text {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
 }
 
 .toggles {

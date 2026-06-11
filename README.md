@@ -6,6 +6,12 @@ ClearPass is a simple password generator that creates strong, readable passwords
 
 All passwords are generated locally in the browser. Nothing is sent to a server, stored remotely, or logged.
 
+## URLs
+
+* [clearpass.offsec.nl](https://clearpass.offsec.nl/)
+* [password.offsec.nl](https://password.offsec.nl/)
+* [pw.offsec.nl](https://pw.offsec.nl/)
+
 ## Why ClearPass?
 
 Typing or sharing generated passwords can be error-prone when they contain visually similar characters. ClearPass solves this by creating passwords that are both secure and easier for humans to read, copy, and type correctly.
@@ -17,6 +23,8 @@ Typing or sharing generated passwords can be error-prone when they contain visua
 * Uses `crypto.getRandomValues` for random password generation
 * Adjustable password length and number of passwords
 * Optional lowercase, uppercase, number, and symbol character groups
+* Guarantees every selected character group appears at least once
+* Shows an approximate entropy estimate for the current settings
 * Per-password copy buttons
 * No server-side processing
 * No tracking, logging, or storage
@@ -34,18 +42,14 @@ The ambiguous characters `1`, `l`, `0`, `O`, and `I` are intentionally excluded.
 
 ## Run locally
 
-Open `index.html` in your browser. No build step, dependencies, or server are required.
-
-For the deployable version, serve the `public` directory:
+Serve the `public` directory:
 
 ```sh
 python3 -m http.server 8080 --directory public
 ```
 
-## Hosting
+No build step or dependencies are required.
 
-The `public` directory contains the static site and security headers for hosting on:
+## Deploy
 
-* `clearpass.offsec.nl`
-* `password.offsec.nl`
-* `pw.offsec.nl`
+Publish the `public` directory with Cloudflare Pages. It contains the static site, security headers, cache rules, `robots.txt`, `sitemap.xml`, and `security.txt`.
