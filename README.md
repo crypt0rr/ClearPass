@@ -35,3 +35,17 @@ The ambiguous characters `1`, `l`, `0`, `O`, and `I` are intentionally excluded.
 ## Run locally
 
 Open `index.html` in your browser. No build step, dependencies, or server are required.
+
+For the deployable version, serve the `public` directory:
+
+```sh
+python3 -m http.server 8080 --directory public
+```
+
+## Hosting
+
+The `public` directory contains the static site and security headers for hosting on:
+
+* `clearpass.offsec.nl`
+* `password.offsec.nl`
+* `pw.offsec.nl`
