@@ -23,6 +23,8 @@ Typing or sharing generated passwords can be error-prone when they contain visua
 * Uses `crypto.getRandomValues` for random password generation
 * Adjustable password length and number of passwords
 * Optional lowercase, uppercase, number, and symbol character groups
+* Guarantees every selected character group appears at least once
+* Shows an approximate entropy estimate for the current settings
 * Per-password copy buttons
 * No server-side processing
 * No tracking, logging, or storage
@@ -47,3 +49,7 @@ python3 -m http.server 8080 --directory public
 ```
 
 No build step or dependencies are required.
+
+## Deploy
+
+Publish the `public` directory with Cloudflare Pages. It contains the static site, security headers, cache rules, `robots.txt`, `sitemap.xml`, and `security.txt`.

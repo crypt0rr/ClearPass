@@ -10,6 +10,7 @@ const results = document.querySelector("#results");
 const status = document.querySelector("#status");
 const lengthInput = document.querySelector("#length");
 const countInput = document.querySelector("#count");
+const entropy = document.querySelector("#entropy");
 
 function clampNumber(value, min, max, fallback) {
   const number = Number.parseInt(value, 10);
@@ -32,19 +33,48 @@ function getRandomIndex(max) {
   return randomValue[0] % max;
 }
 
-function generatePassword(length, characters) {
-  let password = "";
-
-  for (let index = 0; index < length; index += 1) {
-    password += characters[getRandomIndex(characters.length)];
-  }
-
-  return password;
+function getSelectedGroups() {
+  return [...form.querySelectorAll("input[name='group']:checked")].map(
+    (input) => CHARACTER_GROUPS[input.value]
+  );
 }
 
-function getSelectedCharacters() {
-  const checkedGroups = [...form.querySelectorAll("input[name='group']:checked")];
-  return checkedGroups.map((input) => CHARACTER_GROUPS[input.value]).join("");
+function shuffleSecurely(characters) {
+  const shuffled = [...characters];
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = getRandomIndex(index + 1);
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+
+  return shuffled.join("");
+}
+
+function generatePassword(length, selectedGroups) {
+  const characters = selectedGroups.join("");
+  const passwordCharacters = selectedGroups.map(
+    (group) => group[getRandomIndex(group.length)]
+  );
+
+  for (let index = passwordCharacters.length; index < length; index += 1) {
+    passwordCharacters.push(characters[getRandomIndex(characters.length)]);
+  }
+
+  return shuffleSecurely(passwordCharacters);
+}
+
+function updateEntropy() {
+  const selectedGroups = getSelectedGroups();
+  const characters = selectedGroups.join("");
+  const length = clampNumber(lengthInput.value, 8, 128, 20);
+
+  if (characters.length === 0) {
+    entropy.textContent = "Choose at least one group to estimate entropy.";
+    return;
+  }
+
+  const bits = Math.round(length * Math.log2(characters.length));
+  entropy.textContent = `About ${bits} bits of entropy with the current settings.`;
 }
 
 function setStatus(message, isError = false) {
@@ -113,22 +143,27 @@ function renderPasswords(passwords) {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const characters = getSelectedCharacters();
+  const selectedGroups = getSelectedGroups();
   const length = clampNumber(lengthInput.value, 8, 128, 20);
   const count = clampNumber(countInput.value, 1, 20, 5);
 
   lengthInput.value = length;
   countInput.value = count;
 
-  if (characters.length === 0) {
+  if (selectedGroups.length === 0) {
     setStatus("Choose at least one character group.", true);
+    updateEntropy();
     return;
   }
 
   const passwords = Array.from({ length: count }, () =>
-    generatePassword(length, characters)
+    generatePassword(length, selectedGroups)
   );
 
   renderPasswords(passwords);
+  updateEntropy();
   setStatus(`Generated ${count} password${count === 1 ? "" : "s"}.`);
 });
+
+form.addEventListener("input", updateEntropy);
+updateEntropy();

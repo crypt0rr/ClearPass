@@ -8,6 +8,14 @@
       name="description"
       content="Generate strong, readable passwords locally in your browser without confusing characters."
     >
+    <meta name="theme-color" content="#0f766e">
+    <meta property="og:title" content="ClearPass">
+    <meta
+      property="og:description"
+      content="Generate strong, readable passwords locally in your browser without confusing characters."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clearpass.offsec.nl/">
     <link rel="canonical" href="https://clearpass.offsec.nl/">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/app.js" defer></script>
@@ -55,16 +63,36 @@
             <div class="control-grid">
               <div>
                 <label for="length">Length</label>
-                <input id="length" name="length" type="number" min="8" max="128" value="20" inputmode="numeric">
+                <input
+                  id="length"
+                  name="length"
+                  type="number"
+                  min="8"
+                  max="128"
+                  value="20"
+                  inputmode="numeric"
+                  aria-describedby="length-help entropy"
+                >
+                <p class="help-text" id="length-help">8 to 128 characters.</p>
               </div>
               <div>
                 <label for="count">Passwords</label>
-                <input id="count" name="count" type="number" min="1" max="20" value="5" inputmode="numeric">
+                <input
+                  id="count"
+                  name="count"
+                  type="number"
+                  min="1"
+                  max="20"
+                  value="5"
+                  inputmode="numeric"
+                  aria-describedby="count-help"
+                >
+                <p class="help-text" id="count-help">Generate 1 to 20 at once.</p>
               </div>
             </div>
 
-            <div>
-              <span class="group-label">Character groups</span>
+            <fieldset class="character-groups">
+              <legend>Character groups</legend>
               <div class="toggles">
                 <label class="toggle">
                   <input type="checkbox" name="group" value="lower" checked>
@@ -83,7 +111,8 @@
                   Symbols
                 </label>
               </div>
-            </div>
+              <p class="help-text" id="entropy" aria-live="polite"></p>
+            </fieldset>
 
             <div class="generate-row">
               <button class="primary-button" type="submit">Generate</button>
