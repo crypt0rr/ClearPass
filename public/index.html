@@ -8,7 +8,7 @@
       name="description"
       content="Generate strong, readable passwords locally in your browser without confusing characters."
     >
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#000000">
     <meta property="og:title" content="ClearPass">
     <meta
       property="og:description"
@@ -21,13 +21,19 @@
     <script src="/assets/app.js" defer></script>
   </head>
   <body>
+    <header class="site-header" aria-label="Site header">
+      <div class="site-header-inner">
+        <a class="brand" href="/" aria-label="ClearPass home">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span>ClearPass</span>
+        </a>
+        <span class="header-tag">Local password generator</span>
+      </div>
+    </header>
     <main class="page">
       <div class="app">
         <section class="intro" aria-labelledby="title">
-          <div class="brand" aria-label="ClearPass">
-            <span class="brand-mark" aria-hidden="true">C</span>
-            <span>ClearPass</span>
-          </div>
+          <span class="eyebrow">Private by design</span>
           <h1 id="title">Readable passwords</h1>
           <p>
             Generate strong passwords locally in your browser, using only
